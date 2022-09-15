@@ -11,7 +11,7 @@ namespace PizzaHub.Entities
             OrderItems = new HashSet<OrderItem>();
         }
         public string Id { get; set; }
-        public string UserId { get; set; }
+        public int UserId { get; set; }
         public string PaymentId { get; set; }
         public string Street { get; set; }
         public string ZipCode { get; set; }
