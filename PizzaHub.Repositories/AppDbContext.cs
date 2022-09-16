@@ -7,6 +7,16 @@ namespace PizzaHub.Repositories
 {
     public class AppDbContext : IdentityDbContext<User,Role,int>
     {
+        //needed for migration
+        public AppDbContext()
+        {
+
+        }
+        //Configuration from Setting
+        public AppDbContext(DbContextOptions options) : base(options)
+        {
+
+        }
         public DbSet<Address> Address { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Item> Items { get; set; }

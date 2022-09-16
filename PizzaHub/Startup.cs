@@ -3,6 +3,10 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using PizzaHub.Configuration;
+using PizzaHub.Services.Configure;
+using PizzaHub.Services.Implementations;
+using PizzaHub.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,6 +26,9 @@ namespace PizzaHub
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //services.AddScoped<IAuthenticationService, AuthenticationService>();
+            ConfigureRepositories.AddServices(services, Configuration);
+            ConfigureDependencies.AddServices(services);
             services.AddControllersWithViews();
         }
 
