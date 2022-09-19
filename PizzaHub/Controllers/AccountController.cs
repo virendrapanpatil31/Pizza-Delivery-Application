@@ -21,6 +21,26 @@ namespace PizzaHub.Controllers
         {
             return View();
         }
+        [HttpPost]
+        public IActionResult Login(LoginModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = _authService.AuthenticateUser(model.Email, model.Password);
+                if(user != null)
+                {
+                    if (user.Roles.Contains("Admin"))
+                    {
+                        return RedirectToAction("Index","Dashboard", new { area = "Admin" });
+                    }
+                    else if(user.Roles.Contains("User"))
+                    {
+                        return RedirectToAction("Index", "Dashboard", new { area = "User" });
+                    }
+                }
+            }
+            return View();
+        }
         public IActionResult SignUp()
         {
             return View();

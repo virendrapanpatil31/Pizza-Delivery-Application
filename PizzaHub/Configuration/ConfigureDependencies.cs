@@ -1,4 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using PizzaHub.Helpers;
+using PizzaHub.Interfaces;
 using PizzaHub.Services.Implementations;
 using PizzaHub.Services.Interfaces;
 using System;
@@ -13,6 +15,7 @@ namespace PizzaHub.Configuration
         public static void AddServices(IServiceCollection services)
         {
             services.AddScoped<IAuthenticationService, AuthenticationService>();
+            services.AddTransient<IUserAccessor, UserAccessor>();
         }
     }
 }

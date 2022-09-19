@@ -12,7 +12,7 @@ namespace PizzaHub.Services.Configure
 {
     public class ConfigureRepositories
     {
-        public static void AddServices(IServiceCollection services,IConfiguration configuration)
+        public static void AddServices(IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<AppDbContext>((options) =>
                 options.UseSqlServer(configuration.GetConnectionString("DbConnection"))
