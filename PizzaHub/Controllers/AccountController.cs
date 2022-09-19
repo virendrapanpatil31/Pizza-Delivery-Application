@@ -26,6 +26,7 @@ namespace PizzaHub.Controllers
             return View();
         }
 
+        [HttpPost]
         public IActionResult SignUp(UserModel model)
         {
             if (ModelState.IsValid)
