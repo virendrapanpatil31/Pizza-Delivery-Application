@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PizzaHub.Interfaces
 {
-    interface IUserAccessor
+    public interface IUserAccessor
     {
         User GetUser();
     }

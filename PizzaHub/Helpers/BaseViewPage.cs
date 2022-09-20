@@ -12,7 +12,7 @@ namespace PizzaHub.Helpers
     public abstract class BaseViewPage<TModel> : RazorPage<TModel>
     {
         [RazorInject]
-        private IUserAccessor _userAccessor { get; set; }
+        public IUserAccessor _userAccessor { get; set; }
         public User CurrentUser
         {
             get
