@@ -17,6 +17,7 @@ namespace PizzaHub.Configuration
             services.AddScoped<IAuthenticationService, AuthenticationService>();
             services.AddTransient<IUserAccessor, UserAccessor>();
             services.AddTransient<ICatalogService, CatalogService>();
+            services.AddTransient<IFileHelper, FileHelper>();
         }
     }
 }
