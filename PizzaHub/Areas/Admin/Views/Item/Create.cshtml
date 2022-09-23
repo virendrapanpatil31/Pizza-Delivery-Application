@@ -1,16 +1,15 @@
 ﻿@model PizzaHub.Models.ItemModel
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = Model != null ? "Edit" : "Create";
 }
 
-<h1>Create</h1>
+<h1> @ViewData["Title"] </h1>
 
-<h4>ItemModel</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create" enctype="multipart/form-data">
+        <form asp-action="@ViewData["Title"]" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
             <input asp-for="Id" type="hidden" />
@@ -47,9 +46,16 @@
                 <label asp-for="File" class="control-label"></label>
                 <input type="file" asp-for="File" class="form-control" style="border:none;padding: .375rem 0;" />
                 <span asp-validation-for="File" class="text-danger"></span>
+                <br />
+                @if (Model != null &&  !string.IsNullOrEmpty(Model.ImageUrl))
+                {
+                    <input type="hidden" asp-for="ImageUrl" />
+                    <img id="itemImage" src="@Model.ImageUrl" height="150" width="150" style="border: 1px solid"/>
+                }
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
+                &nbsp; <a asp-action="Index" asp-controller="Item" class="btn btn-warning">Cancel</a>
             </div>
         </form>
     </div>
@@ -57,4 +63,4 @@
 
 @section Scripts{
     @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
- }
+}

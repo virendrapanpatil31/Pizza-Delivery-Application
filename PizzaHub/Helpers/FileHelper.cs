@@ -24,7 +24,7 @@ namespace PizzaHub.Helpers
             string strFileName = DateTime.Now.ToUniversalTime().ToString("yyyyMMdd\\THHmmssfff") + "." + strName[strName.Length - 1];
             return strFileName;
         }
-        public void Delete(string imageUrl)
+        public void DeleteFile(string imageUrl)
         {
             //Deleting Exisiting File
             if (File.Exists(_env.WebRootPath + imageUrl))

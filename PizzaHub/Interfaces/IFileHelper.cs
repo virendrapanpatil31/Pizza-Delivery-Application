@@ -8,7 +8,7 @@ namespace PizzaHub.Interfaces
 {
     public interface IFileHelper
     {
-        void Delete(string imageUrl);
+        void DeleteFile(string imageUrl);
         string UploadFile(IFormFile file);
     }
 }
