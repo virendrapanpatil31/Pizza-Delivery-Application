@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using PizzaHub.Models;
+using PizzaHub.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -12,15 +13,17 @@ namespace PizzaHub.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private readonly ICatalogService _catalogService;
+        public HomeController(ILogger<HomeController> logger,ICatalogService catalogService)
         {
             _logger = logger;
+            _catalogService = catalogService;
         }
 
         public IActionResult Index()
         {
-            return View();
+            var data = _catalogService.GetItems();
+            return View(data);
         }
 
         public IActionResult Privacy()
