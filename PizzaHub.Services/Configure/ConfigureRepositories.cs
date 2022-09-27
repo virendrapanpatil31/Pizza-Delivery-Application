@@ -25,6 +25,7 @@ namespace PizzaHub.Services.Configure
             services.AddTransient<IRepository<Item>, Repository<Item>>();
             services.AddTransient<IRepository<Category>, Repository<Category>>();
             services.AddTransient<IRepository<ItemType>, Repository<ItemType>>();
+            services.AddTransient<IRepository<CartItem>, Repository<CartItem>>();
         }
     }
 }

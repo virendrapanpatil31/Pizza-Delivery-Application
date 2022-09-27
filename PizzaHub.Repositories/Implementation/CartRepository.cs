@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PizzaHub.Entities;
 using PizzaHub.Repositories.Interfaces;
+using PizzaHub.Repositories.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -72,6 +73,32 @@ namespace PizzaHub.Repositories.Implementation
             Cart cart = GetCart(cartId);
             cart.UserId = userId;
             return appDbContext.SaveChanges();
+        }
+
+        public CartModel GetCartDetails(Guid CartId)
+        {
+            var model = (from cart in appDbContext.Carts
+                         where cart.Id == CartId && cart.IsActive == true
+                         select new CartModel
+                         {
+                             Id = cart.Id,
+                             UserId = cart.UserId,
+                             CreatedDate = cart.CreateDate,
+                             Items = (from cartItem in appDbContext.CartItems
+                                      join item in appDbContext.Items
+                                      on cartItem.ItemId equals item.Id
+                                      where cartItem.CartId == CartId
+                                      select new ItemModel {
+                                          Id = cartItem.Id,
+                                          Name = item.Name,
+                                          Description = item.Description,
+                                          ImageUrl = item.ImageUrl,
+                                          Quantity = cartItem.Quantity,
+                                          ItemId = item.Id,
+                                          UnitPrice = item.UnitPrice
+                                      }).ToList(),
+                         }).FirstOrDefault();
+            return model;
         }
     }
 }
