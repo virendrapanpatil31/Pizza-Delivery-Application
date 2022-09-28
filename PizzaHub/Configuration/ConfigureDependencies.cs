@@ -18,6 +18,7 @@ namespace PizzaHub.Configuration
             services.AddTransient<IUserAccessor, UserAccessor>();
             services.AddTransient<ICatalogService, CatalogService>();
             services.AddTransient<IFileHelper, FileHelper>();
+            services.AddTransient<ICartService, CartService>(); 
         }
     }
 }

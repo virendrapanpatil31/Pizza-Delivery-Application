@@ -6,6 +6,8 @@ using PizzaHub.Entities;
 using PizzaHub.Repositories;
 using PizzaHub.Repositories.Implementation;
 using PizzaHub.Repositories.Interfaces;
+using PizzaHub.Services.Implementations;
+using PizzaHub.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -22,6 +24,7 @@ namespace PizzaHub.Services.Configure
             services.AddIdentity<User, Role>().AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
             services.AddScoped<DbContext, AppDbContext>();
 
+            services.AddTransient<ICartRepository, CartRepository>();
             services.AddTransient<IRepository<Item>, Repository<Item>>();
             services.AddTransient<IRepository<Category>, Repository<Category>>();
             services.AddTransient<IRepository<ItemType>, Repository<ItemType>>();

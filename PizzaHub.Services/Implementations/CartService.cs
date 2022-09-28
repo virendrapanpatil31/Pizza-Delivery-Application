@@ -76,7 +76,21 @@ namespace PizzaHub.Services.Implementations
 
         public CartModel GetCartDetails(Guid cartId)
         {
-            throw new NotImplementedException();
+            var model = _cartRepo.GetCartDetails(cartId);
+            if(model != null && model.Items.Count > 0)
+            {
+                decimal subTotal = 0;
+                foreach(var item in model.Items)
+                {
+                    item.Total = item.UnitPrice * item.Quantity;
+                    subTotal += item.Total;
+                }
+                model.Total = subTotal;
+                //5%
+                model.Tax = Math.Round((model.Total*5)/100,2);
+                model.GrandTotal = model.Tax + model.Total;
+            }
+            return model;
         }
 
         public int updateCart(Guid cartId, int UserId)

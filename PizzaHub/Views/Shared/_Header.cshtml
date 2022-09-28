@@ -21,6 +21,9 @@
             </div>
             <div navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse>
                 <ul class="navbar-nav">
+                    <a class="nav-link text-dart" asp-area="" asp-controller="Cart" asp-action="Index" >
+                        <span class="noti_Counter">0</span><i class="bi bi-cart"></i>
+                    </a>
                     @if (CurrentUser != null)
                     {
                         <li class="nav-item">
