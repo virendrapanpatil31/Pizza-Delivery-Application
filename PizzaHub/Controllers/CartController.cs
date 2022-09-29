@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using PizzaHub.Entities;
+using PizzaHub.Helpers;
 using PizzaHub.Repositories.Models;
 using PizzaHub.Services.Interfaces;
 using System;
@@ -39,6 +40,11 @@ namespace PizzaHub.Controllers
         public IActionResult Index()
         {
             CartModel cart = _cartService.GetCartDetails(CartId);
+            if(CurrentUser != null && cart != null)
+            {
+                TempData.Set("Cart", cart);
+                _cartService.updateCart(cart.Id, CurrentUser.Id);
+            }
             return View(cart);
         }
         [Route("/Cart/AddToCart/{ItemId}/{UnitPrice}/{Quantity}")]
@@ -72,6 +78,16 @@ namespace PizzaHub.Controllers
         {
             int count = _cartService.GetCartCount(CartId);
             return Json(count);
+        }
+        public IActionResult CheckOut()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult CheckOut(Address address)
+        {
+            TempData.Set("Address", address);
+            return RedirectToAction("Index","Payment");
         }
     }
 }
