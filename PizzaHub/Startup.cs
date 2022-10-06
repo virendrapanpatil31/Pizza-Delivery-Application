@@ -7,6 +7,7 @@ using PizzaHub.Configuration;
 using PizzaHub.Services.Configure;
 using PizzaHub.Services.Implementations;
 using PizzaHub.Services.Interfaces;
+using PizzaHub.Services.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,6 +39,7 @@ namespace PizzaHub
                 builder.AddRazorRuntimeCompilation();
             }
 #endif
+            services.Configure<RazorPayConfig>(Configuration.GetSection("RazorPayConfig"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

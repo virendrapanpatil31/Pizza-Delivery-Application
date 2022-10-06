@@ -25,10 +25,13 @@ namespace PizzaHub.Services.Configure
             services.AddScoped<DbContext, AppDbContext>();
 
             services.AddTransient<ICartRepository, CartRepository>();
+            services.AddTransient<IOrderRepository, OrderRepository>();
             services.AddTransient<IRepository<Item>, Repository<Item>>();
             services.AddTransient<IRepository<Category>, Repository<Category>>();
             services.AddTransient<IRepository<ItemType>, Repository<ItemType>>();
             services.AddTransient<IRepository<CartItem>, Repository<CartItem>>();
+            services.AddTransient<IRepository<OrderItem>, Repository<OrderItem>>();
+            services.AddTransient<IRepository<PaymentDetails>, Repository<PaymentDetails>>();
         }
     }
 }

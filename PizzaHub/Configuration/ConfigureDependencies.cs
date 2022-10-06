@@ -15,10 +15,13 @@ namespace PizzaHub.Configuration
         public static void AddServices(IServiceCollection services)
         {
             services.AddScoped<IAuthenticationService, AuthenticationService>();
+
+            services.AddTransient<IPaymentService, PaymentService>();
             services.AddTransient<IUserAccessor, UserAccessor>();
             services.AddTransient<ICatalogService, CatalogService>();
             services.AddTransient<IFileHelper, FileHelper>();
-            services.AddTransient<ICartService, CartService>(); 
+            services.AddTransient<ICartService, CartService>();
+            services.AddTransient<IOrderService, OrderService>();
         }
     }
 }

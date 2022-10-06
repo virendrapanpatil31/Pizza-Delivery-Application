@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using PizzaHub.Entities;
 using PizzaHub.Helpers;
+using PizzaHub.Interfaces;
 using PizzaHub.Repositories.Models;
 using PizzaHub.Services.Interfaces;
 using System;
@@ -33,7 +34,7 @@ namespace PizzaHub.Controllers
                 return Id;
             }
         }
-        public CartController(ICartService cartService,UserManager<User> userManager):base(userManager)
+        public CartController(ICartService cartService,IUserAccessor userAccessor):base(userAccessor)
         {
             _cartService = cartService;
         }
@@ -51,6 +52,7 @@ namespace PizzaHub.Controllers
         public IActionResult AddToCart(int ItemId, decimal UnitPrice, int Quantity)
         {
             int UserId = CurrentUser != null ? CurrentUser.Id : 0;
+
             if(ItemId > 0 && Quantity > 0)
             {
                 Cart cart = _cartService.AddItem(UserId, CartId, ItemId, UnitPrice, Quantity);

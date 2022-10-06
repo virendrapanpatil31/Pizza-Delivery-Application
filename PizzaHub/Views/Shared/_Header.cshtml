@@ -19,31 +19,7 @@
                     </li>
                 </ul>
             </div>
-            <div navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse>
-                <ul class="navbar-nav">
-                    <a class="nav-link text-dart" asp-area="" asp-controller="Cart" asp-action="Index" >
-                        <span class="noti_Counter">0</span><i class="bi bi-cart"></i>
-                    </a>
-                    @if (CurrentUser != null)
-                    {
-                        <li class="nav-item">
-                            <span class="nav-link text-dark">Welcome @CurrentUser.Name</span>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="LogOut">Logout</a>
-                        </li>
-                    }
-                    else
-                    {
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="SignUp">Sign Up</a>
-                        </li>
-                    }
-                </ul>
-            </div>
+            <partial name="_UserMenu" />
         </div>
     </nav>
 </header>

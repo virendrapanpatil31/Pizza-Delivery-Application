@@ -106,7 +106,7 @@
                                 <span><strong>₹@Model.Cart.GrandTotal</strong></span>
                             </li>
                         </ul>
-                        @*@if (CurrentUser != null)
+                        @if (CurrentUser != null)
                             {
                                 <button id="rzp-button" hidden>Pay</button>
                                 @using (Html.BeginForm("Status", "Payment", FormMethod.Post, new { id = "PaymentForm", name = "PaymentForm" }))
@@ -120,10 +120,55 @@
                                     <button type="submit" id="rzp-paymentresponse" hidden style="display: none;">Submit</button>
                                 }
                                 <a href="#" class="btn btn-primary btn-block" onclick="submitToPayment()">Pay Now</a>
-                            }*@
+                            }
                     </div>
                 </div>
             </div>
         </div>
     }
 </section>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+    var options = {
+        "key": "@Model.RazorpayKey",
+        "amount": "@(Model.GrandTotal * 100)",
+        "currency": "@Model.Currency",
+        "name": "@Model.Name",
+        "description": "@Model.Description",
+        "image": "https://www.dotnettricks.com/images/d-icon.png",
+        "order_id": "@Model.OrderId",
+        "handler": function (response) {
+            document.getElementById("rzp_paymentid").value = response.razorpay_payment_id;
+            document.getElementById("rzp_orderid").value = response.razorpay_order_id;
+            $("#rzp_signature").val(response.razorpay_signature);
+            $("#PaymentForm").submit();
+        },
+        "prefill": {
+            "name": "@CurrentUser.Name",
+            "email": "@CurrentUser.Email",
+            "contact": "@CurrentUser.PhoneNumber"
+        },
+        "notes": {
+            "address": "NA"
+        },
+        "theme": {
+            "color": "#4285F4"
+        }
+    };
+
+    var rzp = new Razorpay(options);
+
+    window.onload = function () {
+        document.getElementById('rzp_button').click();
+    };
+
+    document.getElementById('rzp_button').onclick = function (e) {
+        rzp.open();
+        e.preventDefault();
+    }
+
+    function submitToPayment() {
+        rzp.open();
+        e.preventDefault();
+    }
+</script>

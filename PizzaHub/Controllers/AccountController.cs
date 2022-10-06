@@ -29,7 +29,7 @@ namespace PizzaHub.Controllers
                 var user = _authService.AuthenticateUser(model.Email, model.Password);
                 if(user != null)
                 {
-                    if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
+                    if (!String.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
                         return Redirect(returnUrl);
                     if (user.Roles.Contains("Admin"))
                     {
